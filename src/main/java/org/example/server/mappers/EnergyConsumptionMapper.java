@@ -3,7 +3,6 @@ package org.example.server.mappers;
 
 import org.example.server.dto.SensorDTO;
 import org.example.server.models.EnergyConsumption;
-import org.example.server.models.EngineTemprature;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

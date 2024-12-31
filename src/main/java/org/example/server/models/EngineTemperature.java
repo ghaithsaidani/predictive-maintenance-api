@@ -5,5 +5,5 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "engine_tempratures")
-public class EngineTemprature extends Sensor{
+public class EngineTemperature extends Sensor{
 }

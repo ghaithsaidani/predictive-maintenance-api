@@ -6,10 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.example.server.dto.SensorDTO;
 import org.example.server.services.EnergyConsumptionServiceImpl;
-import org.example.server.services.EngineTempratureServiceImpl;
+import org.example.server.services.EngineTemperatureServiceImpl;
 import org.example.server.services.FuelFlowServiceImpl;
 import org.example.server.services.TirePressureServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +42,7 @@ public class MqttConfig {
     private String TOPICS;
     private final SimpMessagingTemplate messagingTemplate;
     private final TirePressureServiceImpl tirePressureService;
-    private final EngineTempratureServiceImpl engineTempratureService;
+    private final EngineTemperatureServiceImpl engineTempratureService;
     private final EnergyConsumptionServiceImpl energyConsumptionService;
     private final FuelFlowServiceImpl fuelFlowService;
 
