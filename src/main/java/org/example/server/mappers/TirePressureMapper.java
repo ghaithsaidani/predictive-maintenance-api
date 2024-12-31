@@ -11,6 +11,8 @@ import java.util.List;
 @Mapper
 public interface TirePressureMapper extends SensorMapper<TirePressure> {
     TirePressureMapper Instance = Mappers.getMapper(TirePressureMapper.class);
+
+
     @Override
     TirePressure map(SensorDTO sensorData);
 

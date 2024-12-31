@@ -1,7 +1,9 @@
 package org.example.server.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -11,6 +13,8 @@ import java.util.Date;
 @MappedSuperclass
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class Sensor implements Serializable {
 
     @Id

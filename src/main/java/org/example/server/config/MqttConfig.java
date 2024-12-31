@@ -1,9 +1,13 @@
 package org.example.server.config;
 
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.example.server.dto.SensorDTO;
+import org.example.server.services.EnergyConsumptionServiceImpl;
+import org.example.server.services.EngineTempratureServiceImpl;
+import org.example.server.services.FuelFlowServiceImpl;
 import org.example.server.services.TirePressureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +29,7 @@ import java.util.Date;
 
 @Configuration
 @Slf4j
+@RequiredArgsConstructor
 public class MqttConfig {
     @Value("${mqtt.broker.url}")
     private String brokerUrl;
@@ -38,11 +43,10 @@ public class MqttConfig {
     private String TOPICS;
     private final SimpMessagingTemplate messagingTemplate;
     private final TirePressureServiceImpl tirePressureService;
-    @Autowired
-    public MqttConfig(SimpMessagingTemplate messagingTemplate, TirePressureServiceImpl tirePressureService) {
-        this.messagingTemplate = messagingTemplate;
-        this.tirePressureService = tirePressureService;
-    }
+    private final EngineTempratureServiceImpl engineTempratureService;
+    private final EnergyConsumptionServiceImpl energyConsumptionService;
+    private final FuelFlowServiceImpl fuelFlowService;
+
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
@@ -79,15 +83,18 @@ public class MqttConfig {
             SensorDTO sensorData = processPayload(topic.split("/")[1],payload);
             if(topic.equals("sensors/fuel_flow"))
             {
-                messagingTemplate.convertAndSend("/sensors/fuel_flow", sensorData);
+                SensorDTO data = fuelFlowService.saveSensorData(sensorData);
+                messagingTemplate.convertAndSend("/sensors/fuel_flow", data);
             }
             if(topic.equals("sensors/energy_consumption"))
             {
-                messagingTemplate.convertAndSend("/sensors/energy_consumption", sensorData);
+                SensorDTO data = energyConsumptionService.saveSensorData(sensorData);
+                messagingTemplate.convertAndSend("/sensors/energy_consumption", data);
             }
             if(topic.equals("sensors/engine_temperature"))
             {
-                messagingTemplate.convertAndSend("/sensors/engine_temperature", sensorData);
+                SensorDTO data = engineTempratureService.saveSensorData(sensorData);
+                messagingTemplate.convertAndSend("/sensors/engine_temperature", data);
             }
             if(topic.equals("sensors/tire_pressure"))
             {

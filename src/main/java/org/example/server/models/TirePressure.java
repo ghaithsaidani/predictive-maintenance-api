@@ -9,12 +9,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "tire_pressures")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class TirePressure extends Sensor{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
 }
