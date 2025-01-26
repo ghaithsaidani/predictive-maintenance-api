@@ -1,5 +1,3 @@
-### Prevention Maintenance System API
-
 # Predictive Maintenance API
 
 This repository contains the backend service for the Predictive Maintenance API, designed to monitor IoT-enabled vehicle sensors and predict maintenance needs before critical failures occur. The backend is implemented using Spring Boot.
